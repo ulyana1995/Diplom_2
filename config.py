@@ -1,0 +1,6 @@
+BASE_URL = 'https://qa-stellarburgers.education-services.ru/'
+CREATE_USER_ENDPOINT = f'{BASE_URL}/api/auth/register'
+LOGIN_USER_ENDPOINT = f'{BASE_URL}/api/auth/login'
+USER_DATA_ENDPOINT = f'{BASE_URL}/api/auth/user'
+INGREDIENTS_ENDPOINT = f'{BASE_URL}/api/ingredients' 
+ORDERS_ENDPOINT = f'{BASE_URL}/api/orders' 
