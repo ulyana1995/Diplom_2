@@ -8,11 +8,8 @@ import pytest
 
 class TestCreateUser:
     @allure.title("Создание нового пользователя")
-    def test_create_unique_user_is_successful(self):
-        payload = generate_user_data()
-    
-        with allure.step("Отправка запроса на создание пользователя"):
-            response = create_user(payload)
+    def test_create_unique_user_is_successful(self, created_user):
+        response = created_user["response"]
 
         with allure.step(f"Проверяем статус код = {HTTP_STATUS_OK}"):
             assert response.status_code == HTTP_STATUS_OK
@@ -22,11 +19,8 @@ class TestCreateUser:
 
         with allure.step("Проверяем структуру и значения тела ответа"):
             assert response_data["success"] is True
-            assert response_data["user"]["email"] == payload["email"]
-            assert response_data["user"]["name"] == payload["name"]
-
-        with allure.step("Удаление созданного пользователя"):
-            delete_user(response_data.get("accessToken"))    
+            assert response_data["user"]["email"] == created_user["email"]
+            assert response_data["user"]["name"] == created_user["name"]   
 
     @allure.title("Создание уже существующего пользователя возвращает ошибку")
     def test_create_duplicate_user_error(self, created_user):

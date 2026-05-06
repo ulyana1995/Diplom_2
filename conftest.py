@@ -20,10 +20,12 @@ def created_user():
         "email": email,
         "password": password,
         "name": name,
-        "token": token       
+        "token": token,
+        "response": response     
     }
     with allure.step("Удаление пользователя"):
-        delete_user(token)
+        if token:
+            delete_user(token)
 
 @pytest.fixture
 def ingredients_list():
